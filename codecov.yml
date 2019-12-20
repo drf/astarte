@@ -2,30 +2,30 @@ fixes:
   - "::apps/-- the project name --/"
 
 flags:
-  appengineapi:
+  astarte_appengine_api:
     paths:
       - apps/astarte_appengine_api/
-  dataupdaterplant:
+  astarte_data_updater_plant:
     paths:
       - apps/astarte_data_updater_plant/
-  triggerengine:
+  astarte_trigger_engine:
     paths:
       - apps/astarte_trigger_engine/
-  pairing:
+  astarte_pairing:
     paths:
       - apps/astarte_pairing/
-  pairingapi:
+  astarte_pairing_api:
     paths:
       - apps/astarte_pairing_api/
-  realmmanagement:
+  astarte_realm_management:
     paths:
       - apps/astarte_realm_management/
-  realmmanagementapi:
+  astarte_realm_management_api:
     paths:
       - apps/astarte_realm_management_api/
-  housekeeping:
+  astarte_housekeeping:
     paths:
       - apps/astarte_housekeeping/
-  housekeepingapi:
+  astarte_housekeeping_api:
     paths:
       - apps/astarte_housekeeping_api/

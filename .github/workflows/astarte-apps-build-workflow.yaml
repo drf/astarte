@@ -173,4 +173,4 @@ jobs:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       run: |
         sed -i 's/-- the project name --/${{ matrix.app }}/g' codecov.yml
-        bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN -F $(echo ${{ matrix.app }} | sed s/astarte_//g | sed s/_//g)
+        bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN -F ${{ matrix.app }} -v
