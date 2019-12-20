@@ -163,14 +163,20 @@ jobs:
         wait-for-cassandra -T 120000 -h $CASSANDRA_DB_HOST
     - name: Test and Coverage
       working-directory: ./apps/${{ matrix.app }}
-      run: mix coveralls.json  --exclude wip -o coverage_results
+      run: mix coveralls.github  --exclude wip --parallel
       env:
         CFSSL_API_URL: http://localhost:${{ job.services.cfssl.ports[8080] }}
-    - name: Upload Coverage Results to CodeCov
-      # Don't upload more than once per component
-      if: matrix.database == 'scylladb/scylla:3.1.1'
-      env:
-        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      run: |
-        sed -i 's/-- the project name --/${{ matrix.app }}/g' codecov.yml
-        bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN -F $(echo ${{ matrix.app }} | sed s/astarte_//g | sed s/_//g)
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  finalize-coverage:
+    name: Send end parallel to Coveralls
+    runs-on: ubuntu-latest
+    # Wait for Coverage to complete
+    needs:
+      - test-coverage
+    steps:
+    - name: Coveralls Finished
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        parallel-finished: true
